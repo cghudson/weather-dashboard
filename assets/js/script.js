@@ -1,4 +1,30 @@
-var apiKey = "2f2b2008dbc13afbf4925de60c195419";
+var apiKey = "b97e3e2f12586674c02d56c7194b1ef7";
+
+var city = "Madison"
+
+function getLocationData() {
+    var cityData = "https://api.openweathermap.org/geo/1.0/direct?q="+ city + "&limit=1&appid=" + apiKey
+
+    fetch(cityData)
+    .then(function(response) {
+        return response.json()
+    }) .then(function(data) {
+        getCurrentWeather(data[0].lat, data[0].lon)
+    })
+}
+
+function getCurrentWeather(lat, lon) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial")
+    .then(function (response) {
+        return response.json()
+    })
+    .then(function (weatherData) {
+        console.log(weatherData)
+    })
+}
+
+getLocationData(city)
+
 
 //search for city
 //display current conditions of city
