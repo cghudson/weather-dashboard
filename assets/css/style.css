@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    text-align: center;
+    background: linear-gradient(to right, rgb(14, 48, 183), rgb(23, 5, 93));
+    color: white;
+    padding: 0.5%
+}
+
+.header {
+    font-weight: bold;
+}
+
+.search {
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.btn {
+    background: rgb(33, 107, 244);
+    color: white;
+    border-radius: 5px;
+}

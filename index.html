@@ -12,25 +12,26 @@
 </head>
 
 <body>
-    <header>
-        <h1>Weather Dashboard</h1>
+    <header class="row">
+        <h1 class="header col-12">Weather Dashboard</h1>
     </header>
 
     <main>
-        <div>
-            <div>
-                <h2>Search for a City:</h2>
-                <form>
-                    <input type="text" placeholder="Madison" />
-                    <button>Search</button>
-                </form>
+        <div class="container">
+            <div class="d-flex-row">
+                <h2 class="header flex-col-3">Search for a City:</h2>
+                <!-- <form class="form col-3"> -->
+                    <input type="text" placeholder="Madison" class="search flex-col-3"/>
+                    <button class="btn flex-col-3">Search</button>
+                <!-- </form> -->
                 <hr></hr>
                 <!-- searched cities in local storage -->
-                <div></div>
+                <div class=""></div>
             </div>
             <!-- current weater / 5d forecast -->
-            <div>
-                <div></div>
+            <div class="row">
+                <div class="current col-9"></div>
+                <div class="forecast col-9"></div>
             </div>
         </div>
     </main>
