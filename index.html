@@ -28,14 +28,24 @@
                 <!-- searched cities in local storage -->
                 <div class="savedSearch"></div>
             </div>
-            <!-- current weater / 5d forecast -->
+            <!-- current weater -->
             <div class="row">
-                <div class="current col-9"></div>
-                <div class="future col-9"></div>
+                <div class="col-9">
+                    <div class="currentCity">
+                        <div id="temp"></div>
+                        <div id="wind"></div>
+                        <div id="humidity"></div>
+                        <div id="uv"></div>
+                    </div>
+                </div>
+                <!-- 5d forecast -->
+                <div class="future col-9">
+
+                </div>
             </div>
         </div>
     </main>
-
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 

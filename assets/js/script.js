@@ -3,6 +3,7 @@ var apiKey = "b97e3e2f12586674c02d56c7194b1ef7";
 var city = ""
 var citySearchEl = document.querySelector(".search")
 var searchBtnEl = document.querySelector(".search-btn")
+var date = (dayjs().format("MM/DD/YYYY"))
 
 function getLocationData() {
     var cityData = "https://api.openweathermap.org/geo/1.0/direct?q="+ city + "&limit=1&appid=" + apiKey
@@ -21,6 +22,12 @@ function getCurrentWeather(lat, lon) {
         return response.json()
     })
     .then(function (weatherData) {
+        console.log(weatherData)
+        var currentCity = document.querySelector(".currentCity")
+        var icon = weatherData.weather[0].icon
+        var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
+
+        currentCity.innerHTML = (weatherData.name + " " + date + '<img src="' + iconURL + '">')
         
     })
 }
