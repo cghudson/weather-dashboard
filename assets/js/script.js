@@ -123,7 +123,16 @@ function saveWeather(event) {
   }
 }
 
+function clearSearches() {
+    var clearBtn = document.querySelector(".clear")
+    clearBtn.addEventListener("click", function() {
+        localStorage.clear()
+        location.reload()
+    })
+}
+
 searchBtnEl.addEventListener("click", saveWeather);
+clearSearches()
 
 //search for city
 //display current conditions of city
