@@ -28,3 +28,23 @@ header {
     color: white;
     border-radius: 5px;
 }
+
+/* uv index classes */
+.fav {
+    background: rgb(11, 162, 11);
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.mod {
+    background:yellow;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.sev {
+    background: red;
+    border-radius: 3px;
+    padding: 2px;
+}
+/* uv index classes end*/
