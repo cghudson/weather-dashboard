@@ -29,6 +29,10 @@ header {
     border-radius: 5px;
 }
 
+.current-weather-container {
+    border: solid 1px black;
+}
+
 /* uv index classes */
 .fav {
     background: rgb(11, 162, 11);
@@ -48,3 +52,11 @@ header {
     padding: 2px;
 }
 /* uv index classes end*/
+
+/* future forecast styles */
+.card {
+    background: rgb(43, 61, 120);
+    color: white;
+    padding: 4px;
+    text-align: center;
+}

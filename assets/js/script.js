@@ -36,12 +36,16 @@ function getCurrentWeather(lat, lon) {
     })
     .then(function (weatherData) {
       console.log(weatherData);
+      var currentWeatherContainer = document.querySelector(".current-weather")
+      currentWeatherContainer.classList.add("current-weather-container")
+
       var icon = weatherData.current.weather[0].icon;
       var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
       var iconEl = document.getElementById("icon");
       iconEl.innerHTML = '<img src="' + iconURL + '">';
 
       var currentCity = document.querySelector(".currentCity");
+      //need to fix city name - does not display
       currentCity.textContent = weatherData.name + " " + date;
 
       var temp = document.getElementById("temp");
@@ -64,7 +68,30 @@ function getCurrentWeather(lat, lon) {
       } else {
         uvVal.classList.add("sev");
       }
+
+      for (var i = 1; i < 6; i++) {
+        var futureForecastEl = document.querySelector(".future")
+        futureForecastEl.classList.add("card")
+
+        //get future dates
+
+        var futureIconEl = document.createElement("img");
+        futureIconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + weatherData.daily[i].weather[0].icon + '@2x.png')
+
+        var futureTemp = document.createElement("p")
+        futureTemp.textContent = "Temperature: " + weatherData.daily[i].temp.day + " °F"
+
+        var futureWind = document.createElement("p")
+        futureWind.textContent = "Wind: " + weatherData.daily[i].wind_speed + " MPH"
+
+        var futureHumidity = document.createElement("p")
+        futureHumidity.textContent = "Humidity: " + weatherData.daily[i].humidity + "%"
+
+        futureForecastEl.append(futureIconEl, futureTemp, futureWind, futureHumidity)
+        
+      }
     });
+   
 }
 
 function saveWeather(event) {
