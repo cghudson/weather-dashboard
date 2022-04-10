@@ -1,6 +1,8 @@
 var apiKey = "b97e3e2f12586674c02d56c7194b1ef7";
 
-var city = "Madison"
+var city = ""
+var citySearchEl = document.querySelector(".search")
+var searchBtnEl = document.querySelector(".search-btn")
 
 function getLocationData() {
     var cityData = "https://api.openweathermap.org/geo/1.0/direct?q="+ city + "&limit=1&appid=" + apiKey
@@ -19,11 +21,43 @@ function getCurrentWeather(lat, lon) {
         return response.json()
     })
     .then(function (weatherData) {
-        console.log(weatherData)
+        
     })
 }
 
-getLocationData(city)
+function saveWeather (event) {
+    event.preventDefault()
+    if (citySearchEl.value !== "") {
+        city = citySearchEl.value
+        getLocationData(city)
+
+        var savedSearchEl = document.querySelector(".savedSearch")
+        savedSearchEl.textContent = ""
+
+        var cityListEl = localStorage.getItem("search")
+        if (!search) {
+            cityListEl = []
+        } else {
+            cityListEl = JSON.parse(cityListEl)
+        }
+        cityListEl.push(city);
+
+        var search = JSON.stringify(cityListEl)
+        localStorage.setItem("search", search)
+
+        for (var i = 0; i < search.length; i++) {
+            var list = document.createElement("li")
+            list.textContent = cityListEl[i]
+            //setAttribute - class/id
+            savedSearchEl.appendChild(list)
+        }
+    }
+}
+
+searchBtnEl.addEventListener("click", saveWeather)
+
+
+
 
 
 //search for city
