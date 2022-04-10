@@ -26,9 +26,16 @@ function getCurrentWeather(lat, lon) {
         var currentCity = document.querySelector(".currentCity")
         var icon = weatherData.weather[0].icon
         var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
-
         currentCity.innerHTML = (weatherData.name + " " + date + '<img src="' + iconURL + '">')
-        
+
+        var temp = document.getElementById("temp")
+        temp.textContent = "Temperature: " + weatherData.main.temp + " °F"
+
+        var wind = document.getElementById("wind")
+        wind.textContent = "Wind: " + weatherData.wind.speed + " MPH"
+
+        var humidity = document.getElementById("humidity")
+        humidity.textContent = "Humidity: " + weatherData.main.humidity + "%"
     })
 }
 
