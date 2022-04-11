@@ -79,17 +79,18 @@ function getCurrentWeather(lat, lon,city) {
       } else {
         uvVal.classList.add("sev");
       }
-
+      var futureForecastEl = document.querySelector(".future");
+      
       for (var i = 1; i < 6; i++) {
-        var futureForecastEl = document.querySelector(".future");
-        futureForecastEl.classList.add(
-          "cardStyle",
-          "card",
-          "card-group",
-          "p-2",
-          "m-2"
-        );
-
+        var fiveDay = document.createElement("div")
+        fiveDay.classList.add(
+            "cardStyle",
+            "card",
+            "card-group",
+            "p-2",
+            "m-2",
+          );
+        
         //get future dates
 
         var futureIconEl = document.createElement("img");
@@ -99,24 +100,24 @@ function getCurrentWeather(lat, lon,city) {
             weatherData.daily[i].weather[0].icon +
             "@2x.png"
         );
-        futureForecastEl.appendChild(futureIconEl);
+        fiveDay.appendChild(futureIconEl);
 
         var futureTemp = document.createElement("p");
         futureTemp.textContent =
           "Temperature: " + weatherData.daily[i].temp.day + " °F";
-        futureForecastEl.appendChild(futureTemp);
+       fiveDay.appendChild(futureTemp);
 
         var futureWind = document.createElement("p");
         futureWind.textContent =
           "Wind: " + weatherData.daily[i].wind_speed + " MPH";
-        futureForecastEl.appendChild(futureWind);
+        fiveDay.appendChild(futureWind);
 
         var futureHumidity = document.createElement("p");
         futureHumidity.textContent =
           "Humidity: " + weatherData.daily[i].humidity + "%";
-        futureForecastEl.appendChild(futureHumidity);
+        fiveDay.appendChild(futureHumidity);
 
-        futureContainer.appendChild(futureForecastEl);
+        futureForecastEl.appendChild(fiveDay);
       }
     });
 }

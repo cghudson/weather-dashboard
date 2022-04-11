@@ -67,3 +67,11 @@ header {
     padding: 4px;
     text-align: center;
 }
+
+.future {
+    display: flex;
+}
+
+.future div {
+    max-width: 20%;
+}
