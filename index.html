@@ -17,33 +17,38 @@
     </header>
 
     <main>
-        <div class="container-fluid">
-            <div class="d-flex-row">
-                <h2 class="header flex-col-3">Search for a City:</h2>
-                <!-- <form class="form col-3"> -->
-                <input type="text" placeholder="Enter city here" class="search flex-col-3" />
-                <button class="btn search-btn flex-col-3">Search</button>
-                <!-- </form> -->
-                <hr>
-                </hr>
-                <!-- searched cities in local storage -->
-                <div class="savedSearch"></div>
-                <button class="clear btn">Clear Searches</button>
-            </div>
-            <!-- current weater -->
+        <div class="container">
             <div class="row">
-                <div class="col-9 current-weather">
-                    <p id="icon"></p>
-                    <p class="currentCity"></p>
-                    <p id="temp"><p>
-                    <p id="wind"></p>
-                    <p id="humidity"></p>
-                    <p id="uv"></p>
+                <form class="col-lg-3">
+                    <h2 class="titleHeader">Search for a City:</h2>
+                    <!-- <form class="form col-3"> -->
+                    <input type="text" placeholder="Enter city here" class="search" />
+                    <button class="btn search-btn">Search</button>
+                    <!-- </form> -->
+                    <hr>
+                    </hr>
+                    <!-- searched cities in local storage -->
+                    <div class="savedSearch"></div>
+                    <button class="clear btn">Clear Searches</button>
+                </form>
+
+                <!-- current weather -->
+                <div class="col-lg-9">
+                    <div class="current-weather">
+                        <p id="icon"></p>
+                        <p class="currentCity header"></p>
+                        <p id="temp">
+                        <p>
+                        <p id="wind"></p>
+                        <p id="humidity"></p>
+                        <p id="uv"></p>
+                    </div>
+                    <!-- 5d forecast -->
+                    <div class="futureContainer">
+                        <h4 class="futureTitle titleHeader">Five-Day Forecast: </h4>
+                        <div class="future"></div>
+                    </div>
                 </div>
-
-                <!-- 5d forecast -->
-                <div class="future col-9"></div>
-
             </div>
         </div>
     </main>

@@ -18,19 +18,26 @@ header {
     font-weight: bold;
 }
 
+.titleHeader {
+    font-weight: bold;
+    font-size: x-large;
+    margin-top: 2%;
+}
+
 .search {
     border-radius: 5px;
     padding: 3px;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .btn {
     background: rgb(33, 107, 244);
     color: white;
     border-radius: 5px;
-}
-
-.current-weather-container {
-    border: solid 1px black;
+    width: 100%;
+    margin-top: 2%;
 }
 
 /* uv index classes */
@@ -54,7 +61,7 @@ header {
 /* uv index classes end*/
 
 /* future forecast styles */
-.card {
+.cardStyle {
     background: rgb(43, 61, 120);
     color: white;
     padding: 4px;

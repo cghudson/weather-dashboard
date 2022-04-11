@@ -5,6 +5,9 @@ var citySearchEl = document.querySelector(".search");
 var searchBtnEl = document.querySelector(".search-btn");
 var date = dayjs().format("MM/DD/YYYY");
 
+var futureContainer = document.querySelector(".futureContainer")
+var futureTitle = document.querySelector(".futureTitle")
+
 function getLocationData() {
   var cityData =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -37,7 +40,7 @@ function getCurrentWeather(lat, lon) {
     .then(function (weatherData) {
       console.log(weatherData);
       var currentWeatherContainer = document.querySelector(".current-weather")
-      currentWeatherContainer.classList.add("current-weather-container")
+      currentWeatherContainer.classList.add("border", "border-dark", "rounded", "m-2", "p-2")
 
       var icon = weatherData.current.weather[0].icon;
       var iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
@@ -46,7 +49,7 @@ function getCurrentWeather(lat, lon) {
 
       var currentCity = document.querySelector(".currentCity");
       //need to fix city name - does not display
-      currentCity.textContent = weatherData.name + " " + date;
+      currentCity.textContent = weatherData.name + " " + " - " + date;
 
       var temp = document.getElementById("temp");
       temp.textContent = "Temperature: " + weatherData.current.temp + " °F";
@@ -71,25 +74,29 @@ function getCurrentWeather(lat, lon) {
 
       for (var i = 1; i < 6; i++) {
         var futureForecastEl = document.querySelector(".future")
-        futureForecastEl.classList.add("card")
+        futureForecastEl.classList.add("cardStyle", "card", "card-group", "p-2", "m-2")
 
         //get future dates
 
         var futureIconEl = document.createElement("img");
         futureIconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + weatherData.daily[i].weather[0].icon + '@2x.png')
+        futureForecastEl.appendChild(futureIconEl)
 
         var futureTemp = document.createElement("p")
         futureTemp.textContent = "Temperature: " + weatherData.daily[i].temp.day + " °F"
+        futureForecastEl.appendChild(futureTemp)
 
         var futureWind = document.createElement("p")
         futureWind.textContent = "Wind: " + weatherData.daily[i].wind_speed + " MPH"
+        futureForecastEl.appendChild(futureWind)
 
         var futureHumidity = document.createElement("p")
         futureHumidity.textContent = "Humidity: " + weatherData.daily[i].humidity + "%"
+        futureForecastEl.appendChild(futureHumidity)
 
-        futureForecastEl.append(futureIconEl, futureTemp, futureWind, futureHumidity)
-        
+        futureContainer.appendChild(futureForecastEl)
       }
+    
     });
    
 }
