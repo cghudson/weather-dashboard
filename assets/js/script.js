@@ -8,7 +8,7 @@ var date = dayjs().format("MM/DD/YYYY");
 var futureContainer = document.querySelector(".futureContainer");
 var futureTitle = document.querySelector(".futureTitle");
 
-function getLocationData() {
+function getLocationData(city) {
   var cityData =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
@@ -20,13 +20,13 @@ function getLocationData() {
       return response.json();
     })
     .then(function (data) {
-      getCurrentWeather(data[0].lat, data[0].lon);
+      getCurrentWeather(data[0].lat, data[0].lon,city);
       console.log(data[0].name)
     });
 
 }
 
-function getCurrentWeather(lat, lon) {
+function getCurrentWeather(lat, lon,city) {
   fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
       lat +
@@ -57,7 +57,7 @@ function getCurrentWeather(lat, lon) {
 
       var currentCity = document.querySelector(".currentCity");
       //need to fix city name - does not display
-      currentCity.textContent = weatherData.name + " " + " - " + date;
+      currentCity.textContent = city + " " + " - " + date;
 
       var temp = document.getElementById("temp");
       temp.textContent = "Temperature: " + weatherData.current.temp + " °F";
@@ -160,7 +160,15 @@ function clearSearches() {
 
 searchBtnEl.addEventListener("click", saveWeather);
 clearSearches();
-
+var savedSearchEl = document.querySelector(".savedSearch");
+savedSearchEl.addEventListener("click", function(event) {
+    console.log(event.target.tagName)
+    if (event.target.tagName === "LI") {
+        var cityName = event.target.textContent
+        console.log(cityName)
+        getLocationData(cityName)
+    }
+})
 //search for city
 //display current conditions of city
 //display city name, date, icon representation of conditions, temperature, humidity, wind speed, UV index
