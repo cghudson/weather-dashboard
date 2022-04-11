@@ -104,7 +104,7 @@ function getCurrentWeather(lat, lon, city) {
         var futureIconEl = document.createElement("img");
         futureIconEl.setAttribute(
           "src",
-          "http://openweathermap.org/img/wn/" +
+          "https://openweathermap.org/img/wn/" +
             weatherData.daily[i].weather[0].icon +
             "@2x.png"
         );
