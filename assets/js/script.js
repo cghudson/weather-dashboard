@@ -80,7 +80,7 @@ function getCurrentWeather(lat, lon,city) {
         uvVal.classList.add("sev");
       }
       var futureForecastEl = document.querySelector(".future");
-      
+      futureForecastEl.innerHTML = ""
       for (var i = 1; i < 6; i++) {
         var fiveDay = document.createElement("div")
         fiveDay.classList.add(
@@ -92,6 +92,10 @@ function getCurrentWeather(lat, lon,city) {
           );
         
         //get future dates
+        var futureDate = document.createElement("p")
+        futureDate.textContent = dayjs().add(i, 'day').format("MM/DD/YYYY")
+        fiveDay.appendChild(futureDate)
+        
 
         var futureIconEl = document.createElement("img");
         futureIconEl.setAttribute(
@@ -124,10 +128,9 @@ function getCurrentWeather(lat, lon,city) {
 
 function saveWeather(event) {
   event.preventDefault();
+
   if (citySearchEl.value !== "") {
     city = citySearchEl.value;
-    getLocationData(city);
-
     var savedSearchEl = document.querySelector(".savedSearch");
     savedSearchEl.textContent = "";
 
@@ -138,9 +141,25 @@ function saveWeather(event) {
       cityListEl = JSON.parse(cityListEl);
     }
     cityListEl.push(city);
-
     var search = JSON.stringify(cityListEl);
     localStorage.setItem("search", search);
+    getLocationData(city);
+    displayLocalStorage()
+  }
+}
+displayLocalStorage()
+function displayLocalStorage(){
+
+    var savedSearchEl = document.querySelector(".savedSearch");
+    savedSearchEl.textContent = "";
+
+    var cityListEl = localStorage.getItem("search");
+    if (!cityListEl) {
+      cityListEl = [];
+    } else {
+      cityListEl = JSON.parse(cityListEl);
+    }
+  
     savedSearchEl.innerHTML = ""
     for (var i = 0; i < cityListEl.length; i++) {
       var list = document.createElement("li");
@@ -148,7 +167,7 @@ function saveWeather(event) {
       //setAttribute - class/id
       savedSearchEl.appendChild(list);
     }
-  }
+  
 }
 
 function clearSearches() {
