@@ -1,13 +1,19 @@
 var apiKey = "b97e3e2f12586674c02d56c7194b1ef7";
-
 var city = "";
 var citySearchEl = document.querySelector(".search");
 var searchBtnEl = document.querySelector(".search-btn");
 var date = dayjs().format("MM/DD/YYYY");
 
-var futureContainer = document.querySelector(".futureContainer");
-var futureTitle = document.querySelector(".futureTitle");
+//display last search or default city on page load
+var cityListEl = JSON.parse(localStorage.getItem("search"));
+if (cityListEl) {
+  var cityLast = cityListEl[cityListEl.length - 1];
+} else {
+  var cityLast = "Madison";
+}
+getLocationData(cityLast);
 
+//fetch lat, lon, and city name from api
 function getLocationData(city) {
   var cityData =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -20,13 +26,12 @@ function getLocationData(city) {
       return response.json();
     })
     .then(function (data) {
-      getCurrentWeather(data[0].lat, data[0].lon,city);
-      console.log(data[0].name)
+      getCurrentWeather(data[0].lat, data[0].lon, city);
     });
-
 }
 
-function getCurrentWeather(lat, lon,city) {
+//fetch current weather from api and display current weather
+function getCurrentWeather(lat, lon, city) {
   fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
       lat +
@@ -40,7 +45,6 @@ function getCurrentWeather(lat, lon,city) {
       return response.json();
     })
     .then(function (weatherData) {
-      console.log(weatherData);
       var currentWeatherContainer = document.querySelector(".current-weather");
       currentWeatherContainer.classList.add(
         "border",
@@ -56,7 +60,6 @@ function getCurrentWeather(lat, lon,city) {
       iconEl.innerHTML = '<img src="' + iconURL + '">';
 
       var currentCity = document.querySelector(".currentCity");
-      //need to fix city name - does not display
       currentCity.textContent = city + " " + " - " + date;
 
       var temp = document.getElementById("temp");
@@ -80,22 +83,23 @@ function getCurrentWeather(lat, lon,city) {
         uvVal.classList.add("sev");
       }
       var futureForecastEl = document.querySelector(".future");
-      futureForecastEl.innerHTML = ""
+      futureForecastEl.innerHTML = "";
+
+      //generate cards for 5-day forecast
       for (var i = 1; i < 6; i++) {
-        var fiveDay = document.createElement("div")
+        var fiveDay = document.createElement("div");
         fiveDay.classList.add(
-            "cardStyle",
-            "card",
-            "card-group",
-            "p-2",
-            "m-2",
-          );
-        
-        //get future dates
-        var futureDate = document.createElement("p")
-        futureDate.textContent = dayjs().add(i, 'day').format("MM/DD/YYYY")
-        fiveDay.appendChild(futureDate)
-        
+          "cardStyle",
+          "card-body",
+          "text-center",
+          "p-2",
+          "m-2",
+          "col-lg-2"
+        );
+
+        var futureDate = document.createElement("p");
+        futureDate.textContent = dayjs().add(i, "day").format("MM/DD/YYYY");
+        fiveDay.appendChild(futureDate);
 
         var futureIconEl = document.createElement("img");
         futureIconEl.setAttribute(
@@ -109,7 +113,7 @@ function getCurrentWeather(lat, lon,city) {
         var futureTemp = document.createElement("p");
         futureTemp.textContent =
           "Temperature: " + weatherData.daily[i].temp.day + " °F";
-       fiveDay.appendChild(futureTemp);
+        fiveDay.appendChild(futureTemp);
 
         var futureWind = document.createElement("p");
         futureWind.textContent =
@@ -126,6 +130,7 @@ function getCurrentWeather(lat, lon,city) {
     });
 }
 
+//save to local storage
 function saveWeather(event) {
   event.preventDefault();
 
@@ -144,32 +149,32 @@ function saveWeather(event) {
     var search = JSON.stringify(cityListEl);
     localStorage.setItem("search", search);
     getLocationData(city);
-    displayLocalStorage()
+    displayLocalStorage();
   }
 }
-displayLocalStorage()
-function displayLocalStorage(){
 
-    var savedSearchEl = document.querySelector(".savedSearch");
-    savedSearchEl.textContent = "";
+//display city weather data from local storage
+function displayLocalStorage() {
+  var savedSearchEl = document.querySelector(".savedSearch");
+  savedSearchEl.textContent = "";
 
-    var cityListEl = localStorage.getItem("search");
-    if (!cityListEl) {
-      cityListEl = [];
-    } else {
-      cityListEl = JSON.parse(cityListEl);
-    }
-  
-    savedSearchEl.innerHTML = ""
-    for (var i = 0; i < cityListEl.length; i++) {
-      var list = document.createElement("li");
-      list.textContent = cityListEl[i];
-      //setAttribute - class/id
-      savedSearchEl.appendChild(list);
-    }
-  
+  var cityListEl = localStorage.getItem("search");
+  if (!cityListEl) {
+    cityListEl = [];
+  } else {
+    cityListEl = JSON.parse(cityListEl);
+  }
+
+  savedSearchEl.innerHTML = "";
+  for (var i = 0; i < cityListEl.length; i++) {
+    var list = document.createElement("li");
+    list.textContent = cityListEl[i];
+    list.classList.add("historyBtn");
+    savedSearchEl.appendChild(list);
+  }
 }
 
+//clear searches
 function clearSearches() {
   var clearBtn = document.querySelector(".clear");
   clearBtn.addEventListener("click", function () {
@@ -178,23 +183,15 @@ function clearSearches() {
   });
 }
 
+//click past searches and view weather data
+var savedSearchEl = document.querySelector(".savedSearch");
+savedSearchEl.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
+    var cityName = event.target.textContent;
+    getLocationData(cityName);
+  }
+});
+
 searchBtnEl.addEventListener("click", saveWeather);
 clearSearches();
-var savedSearchEl = document.querySelector(".savedSearch");
-savedSearchEl.addEventListener("click", function(event) {
-    console.log(event.target.tagName)
-    if (event.target.tagName === "LI") {
-        var cityName = event.target.textContent
-        console.log(cityName)
-        getLocationData(cityName)
-    }
-})
-//search for city
-//display current conditions of city
-//display city name, date, icon representation of conditions, temperature, humidity, wind speed, UV index
-//display color to indicate if weather is favorable, moderate, or severe
-//display future conditions for city
-//display 5 day forecast, date, icon representation of weather conditions, temperature, wind speed, humidigy
-//save search in local storage
-//display saved searches
-//when clicked, user is presesented with current and future weather conditions
+displayLocalStorage();

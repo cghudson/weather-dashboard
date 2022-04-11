@@ -40,6 +40,17 @@ header {
     margin-top: 2%;
 }
 
+.historyBtn {
+    background: rgb(159, 159, 159);
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    list-style: none;
+    text-align: center;
+    padding: 3px;
+}
+
 /* uv index classes */
 .fav {
     background: rgb(11, 162, 11);
@@ -66,6 +77,7 @@ header {
     color: white;
     padding: 4px;
     text-align: center;
+    border-radius: 4px;
 }
 
 .future {
@@ -75,3 +87,4 @@ header {
 .future div {
     max-width: 20%;
 }
+/* future forecast styles end */
