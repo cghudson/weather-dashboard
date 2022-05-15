@@ -88,14 +88,7 @@ function getCurrentWeather(lat, lon, city) {
       //generate cards for 5-day forecast
       for (var i = 1; i < 6; i++) {
         var fiveDay = document.createElement("div");
-        fiveDay.classList.add(
-          "cardStyle",
-          "card-body",
-          "text-center",
-          "p-2",
-          "m-2",
-          "col-lg-2"
-        );
+        fiveDay.classList.add("cardStyle", "card", "m-1");
 
         var futureDate = document.createElement("p");
         futureDate.textContent = dayjs().add(i, "day").format("MM/DD/YYYY");
