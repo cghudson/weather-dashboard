@@ -169,7 +169,7 @@ function displayLocalStorage() {
   for (var i = 0; i < cityListEl.length; i++) {
     var list = document.createElement("li");
     list.textContent = cityListEl[i];
-    list.classList.add("historyBtn");
+    list.classList.add("historyBtn", "btn", "btn-outline-secondary");
     savedSearchEl.appendChild(list);
   }
 }

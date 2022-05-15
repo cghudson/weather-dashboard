@@ -32,16 +32,15 @@ header {
     margin-bottom: 1%;
 }
 
-.btn {
-    background: rgb(33, 107, 244);
-    color: white;
+.btn-primary {
+    /* background: rgb(33, 107, 244);
+    color: white; */
     border-radius: 5px;
     width: 100%;
     margin-top: 2%;
 }
 
 .historyBtn {
-    background: rgb(159, 159, 159);
     border-radius: 5px;
     width: 100%;
     margin-top: 2%;
